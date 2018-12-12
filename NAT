@@ -1,0 +1,28 @@
+
+虚拟机器世界----->真实设备
+连接外界 -  ----->服务器
+
+
+ 
+1ip_forward开启路由
+2.SNAT启动规则2者
+
+真机路由功能是否开启
+cat /proc/sys/net/ipv4/ip_forward
+
+虚拟机配置网关
+nmcli connection modify eth0 ipv4.method manual ipv4.dns 8.8.8.8 ipv4.gateway 192.168.4.254
+
+激活网关
+nmcli connection up eth0 
+
+查看DNS
+cat /etc/resolv.conf
+
+真机转发地址
+iptables -t nat -I POSTROUTING -s 192.168.4.0/24 -j SNAT --to-source XXX.XXX.XX.XX
+
+查看网关
+route -n
+
+虚拟机配置的思路
